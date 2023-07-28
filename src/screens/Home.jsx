@@ -4,6 +4,7 @@ import "swiper/css";
 import Slider from "../components/Slider";
 import Switch from "../components/Switch";
 import Navbar from "../components/Navbar";
+import Modal from "../components/modals/Modal";
 
 const Home = () => {
   const swiper = useSwiper();
@@ -11,6 +12,7 @@ const Home = () => {
     <div>
       <header>
         <Navbar />
+
         <div className="border border-gary-300 w-100%"></div>
 
         {/* icons */}
@@ -68,6 +70,7 @@ const Home = () => {
           </div>
         </div>
       </main>
+      <Modal isOpen={true} title='Login or Signup' actionLabel='submit' secondaryActionLabel='another label' />
     </div>
   );
 };
