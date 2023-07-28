@@ -40,14 +40,14 @@ const Modal = ({
     onsubmit();
   }, [disabled, onsubmit]);
 
-  //   const handleSecondaryAction = useCallback (()=>{
-  //     if ( disabled || !secondaryAction) {
-  //         return;
-  //       }
+    const handleSecondaryAction = useCallback (()=>{
+      if ( disabled || !secondaryAction) {
+          return;
+        }
 
-  //       secondaryAction();
+        secondaryAction();
 
-  //   }, [])
+    }, [])
 
   if (!isOpen) {
     return null;
@@ -87,11 +87,14 @@ const Modal = ({
                     {/* FOOTER */}
                     <div className="flex flex-col gap-2 p-6">
                         <div className="flex flex-row items-center gap-4 w-full ">
-                        <Button 
-                             label={secondaryActionLabel} 
-                             disabled={disabled}
-                             onClick={handleSubmit}
-                           />
+                            {handleSecondaryAction && secondaryAction && (
+                                   <Button 
+                                   outline
+                                   label={secondaryActionLabel} 
+                                   disabled={disabled}
+                                   onClick={secondaryAction}
+                                 />
+                            ) }
                             <Button 
                              label={actionLabel} 
                              disabled={disabled}
