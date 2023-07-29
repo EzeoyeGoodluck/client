@@ -18,9 +18,10 @@ const Modal = ({
   const [showModal, setShowModal] = useState(isOpen);
   const [disabled, setDisabled] = useState(false);
 
+
   useEffect(() => {
     setShowModal(isOpen);
-  }, []);
+  }, [isOpen]);
 
   const handleClose = useCallback(() => {
     if (disabled) {
@@ -81,8 +82,7 @@ const Modal = ({
                     </div>
                     {/* BODY */}
                     <div className="relative p-6 flex-auto">
-                        {/* {body} */}
-                        The body
+                        {body}
                     </div>
                     {/* FOOTER */}
                     <div className="flex flex-col gap-2 p-6">
