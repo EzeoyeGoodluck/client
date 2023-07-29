@@ -1,10 +1,17 @@
 import { AiFillGithub } from "react-icons/ai";
-// import { signIn } from "next-auth/react";
+
 import { FcGoogle } from "react-icons/fc";
 import Modal from "./Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Heading from "../Heading";
+import Input from "../inputs/Input";
+import {
+
+  FieldValues,
+  SubmitHandler,
+  useForm
+} from 'react-hook-form'
 
 
 
@@ -12,6 +19,16 @@ import Heading from "../Heading";
 
 
 const RegisterModal = () => {
+
+
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors,
+    }
+
+  } = useForm
 
 const [isLoading, setIsLoading] = useState(false)
 
@@ -22,6 +39,13 @@ const bodyContent = (
     <Heading
     title='welcome to Airbnb'
     subtitle='Create an account!' />
+    <Input
+      id="email"
+      label="Email"
+      disabled={isLoading}
+      register={register} 
+      errors={errors}
+      required />
   </div>
 
 
