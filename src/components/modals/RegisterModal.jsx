@@ -13,29 +13,24 @@ import {
   useForm
 } from 'react-hook-form'
 
-
-
-
-
-
 const RegisterModal = () => {
 
 
-  const {
-    register,
-    handleSubmit,
-    formState: {
-      errors,
-    }
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: {
+  //     errors
+  //   }
 
-  } = useForm
+  // } = useForm
 
 const [isLoading, setIsLoading] = useState(false)
 
 const { isOpen } = useSelector((state) => state.modal.value);
 
 const bodyContent = (
-  <div className="flex flex-col gap-4">
+  <form className="flex flex-col gap-4">
     <Heading
     title='welcome to Airbnb'
     subtitle='Create an account!' />
@@ -43,10 +38,18 @@ const bodyContent = (
       id="email"
       label="Email"
       disabled={isLoading}
-      register={register} 
-      errors={errors}
       required />
-  </div>
+       <Input
+      id="name"
+      label="Name"
+      disabled={isLoading}
+      required />
+       <Input
+      id="password"
+      label="password"
+      disabled={isLoading}
+      required />
+  </form>
 
 
 )
