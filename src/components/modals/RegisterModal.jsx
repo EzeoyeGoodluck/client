@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
+import { openModal } from "../../slices/registerSlice";
+import Button from "../Button";
 import { 
   FieldValues, 
   SubmitHandler,
@@ -12,16 +14,6 @@ import {
 } from "react-hook-form";
 
 const RegisterModal = () => {
-
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
-
-  // const submitHandler = (e) =>{
-  //   e.preventDefault();
-  //   console.log('login Succesfull')
-
-  // }
-
   const { 
     register, 
     handleSubmit,
@@ -43,7 +35,6 @@ const { isOpen } = useSelector((state) => state.modal.value);
 
 const bodyContent = (
   <div 
-  // onSubmit={handleSubmit(handleSave)}
   className="flex flex-col gap-4 ">
     <Heading
     title='welcome to Airbnb'
@@ -74,6 +65,51 @@ const bodyContent = (
 
 
 
+///////////////////////////////////////////////////
+
+const footerContent = (
+  <div className="flex flex-col gap-4 mt-3">
+    <hr />
+    <Button 
+      outline 
+      label="Continue with Google"
+      icon={FcGoogle}
+      // onClick={() => signIn('google')} 
+    />
+    <Button 
+      outline 
+      label="Continue with Github"
+      icon={AiFillGithub}
+      // onClick={() => signIn('github')}
+    />
+    <div 
+      className="
+        text-neutral-500 
+        text-center 
+        mt-4 
+        font-light
+      "
+    >
+      <p>Already have an account?
+        <span 
+          // onClick={onToggle} 
+          className="
+            text-neutral-800
+            cursor-pointer 
+            hover:underline
+          "
+          > Log in</span>
+      </p>
+    </div>
+  </div>
+)
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
   return (
      <Modal
         disabled={isLoading}
@@ -83,7 +119,7 @@ const bodyContent = (
         showModal={true}
         secondaryActionLabel="another label"
         body={bodyContent}
-        // onsubmit={handleSave}
+        footer={footerContent}
         onSubmit={handleSubmit(onSubmit)}
       />
   )

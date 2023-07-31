@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
+import { useSelector, useDispatch } from "react-redux";
+import { openModal } from "../../slices/registerSlice";
 
 const Modal = ({ 
     isOpen,
@@ -18,6 +20,8 @@ const Modal = ({
   const [showModal, setShowModal] = useState(isOpen);
   const [disabled, setDisabled] = useState(false);
 
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -30,7 +34,7 @@ const Modal = ({
 
     setShowModal(false);
     setTimeout(() => {
-      onclose();
+      dispatch(openModal())
     }, 300);
   }, [disabled, onclose]);
 
@@ -72,7 +76,7 @@ const Modal = ({
                     {/* HEADER */}
                     <div className="flex items-center p-6 rounded-t justify-center relative border-b-[1px]">
                         <button 
-                        onClick={handleClose}
+                         onClick={handleClose}
                         className="p-1 border-0 hover:opacity-70 transition absolute left-9">
                         <IoMdClose size={18} />
                         </button>
@@ -99,8 +103,9 @@ const Modal = ({
                              label={actionLabel} 
                              disabled={disabled}
                              onClick={handleSubmit}
-                           />                       
+                           />                 
                         </div>
+                        {footer}      
                     </div>
                 </div>
             </div>
