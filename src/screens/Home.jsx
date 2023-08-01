@@ -2,14 +2,28 @@ import "swiper/css";
 import Slider from "../components/Slider";
 import Switch from "../components/Switch";
 import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
+
+import axios from 'axios';
 
 const Home = () => {
+  const [listing, setListing] = useState([])
+  useEffect(()=>{
+    const fetchProducts = async () =>{
+      const { data } = await axios.get('/api/listing');
+      setListing(data)
+      console.log(listing)
+    }
+
+    fetchProducts();
+
+  }, [])
   return (
     <div>
       <header>
         <Navbar />
         <div className="border border-gary-300 w-100%"></div>
-
         {/* icons */}
         <div className="container flex mx-auto text-center p-5">
           {/* <div>
@@ -62,6 +76,30 @@ const Home = () => {
               <Switch />
             </div>
           </div>
+        </div>
+        {/* CARD COMPONENTS */}
+        <div>
+      <div className=" mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+          {listing &&  listing.map(place => (
+            <div className="flex flex-col">
+         {/* <Link > */}
+          <div className="bg-gray-500 mb-2 rounded-2xl flex"> 
+         <img src={place.main_image} alt=""  className="bg-gray-500  rounded-2xl flex     object-cover "/>
+
+          </div>
+          <h2 className="font-bold">{place.name}</h2>
+          <h3 className="text-sm text-gray-500">{place.open_time}</h3>
+          <div className="mt-1">
+            <a className="font-bold">$3,000 
+total before taxes</a>
+          </div>
+          </div>
+       
+          // </Link>  
+       ))} 
+    </div>
+
+        
         </div>
       </main>
     </div>
