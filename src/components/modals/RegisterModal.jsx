@@ -1,12 +1,18 @@
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import Modal from "./Modal";
-import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
 import { openModal } from "../../slices/registerSlice";
 import Button from "../Button";
+import { toast } from "react-toastify";
+
+//Reducer functions
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "../../slices/usersApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+
 import { 
   FieldValues, 
   SubmitHandler,
@@ -23,9 +29,29 @@ const RegisterModal = () => {
   } = useForm();
 
 
-  const onSubmit = (formvalues) =>{
-    console.log(formvalues)
+  const dispatch = useDispatch();
+  const [ login] = useLoginMutation();
+  const { userInfo } = useSelector((state)=> state.auth);
+  
+
+
+  const onSubmit = async (formvalues) =>{
+
+      // const res = login({email:'john@email.com', password:'12345' }).unwrap();
+      // const res = login({...formvalues }).unwrap();
+      // dispatch(setCredentials({...res}));
+
+
+      try{
+        const res =  await  login({... formvalues }).unwrap();
+        dispatch(setCredentials({...res}));
+
+      } catch( error){
+        console.log(error)
+
+      }
   }
+
 
 
 
@@ -46,13 +72,13 @@ const bodyContent = (
       disabled={isLoading}
       errors={errors}
       required />
-       <Input
+       {/* <Input
       id="name"
       label="Name"
       register={register}
       disabled={isLoading}
       errors={errors}
-      required />
+      required /> */}
        <Input
       id="password"
       label="password"

@@ -2,23 +2,12 @@ import "swiper/css";
 import Slider from "../components/Slider";
 import Switch from "../components/Switch";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import { useGetListingQuery } from "../slices/listingApiSlice";
 
-import axios from 'axios';
+
 
 const Home = () => {
-  const [listing, setListing] = useState([])
-  useEffect(()=>{
-    const fetchProducts = async () =>{
-      const { data } = await axios.get('/api/listing');
-      setListing(data)
-      console.log(listing)
-    }
-
-    fetchProducts();
-
-  }, [])
+  const {data: listing, isLoading, isError } = useGetListingQuery();
   return (
     <div>
       <header>

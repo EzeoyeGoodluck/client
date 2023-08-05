@@ -6,16 +6,7 @@ const registerSlice = createSlice ({
     initialState:{value:{isOpen: false}},
     reducers: {
         openModal: (state, action) =>{
-            // const isOpen = state;
-            // state = action.payload;
-
-            // show: (state,action) =>{
-            //     return !state.hidden
-
             state.value.isOpen = !state.value.isOpen;
-            // state.value.isOpen = !state.value.isOpen;
-            //  return !state.isOpen;
-            
         },
 
         closeModal: (state , action) =>{
